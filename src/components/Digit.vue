@@ -4,7 +4,7 @@
       <strong>Please choose a color:</strong>
     </div>
     <div class="form__input">
-      <v-swatches
+      <VSwatches
         v-model="color"
 
         :swatches="swatches"
@@ -13,22 +13,22 @@
         shapes="circles"
         show-border
         popover-x="left"
-      ></v-swatches>
+      ></VSwatches>
     </div>
   </div>
 </template>
 
-<script>
-
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import VSwatches from 'vue-swatches'
 
-export default {
-  components: { VSwatches },
-  data () {
-    return {
-      color: '#F64272',
-      swatches: ['#F64272', '#F6648B', '#F493A7', '#F891A6', '#FFCCD5', '']
-    }
+@Component({
+  components: {
+    VSwatches
   }
+})
+export default class Digit extends Vue {
+  @Prop({ default: '#F64272' }) public color!: string;
+  @Prop({ default () { return ['#F64272', '#F6648B', '#F493A7', '#F891A6', '#FFCCD5', ''] } }) public swatches!: Array<string>;
 }
 </script>
