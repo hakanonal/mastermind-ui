@@ -1,10 +1,8 @@
 <template>
   <div class="hello">
     <h1> Mastermind </h1>
-    <div v-for="chance in param_chances" v-bind:key="chance">
-      <template v-for="digit in param_digit">
-        <Digit :key="(chance*10)+digit" />
-      </template>
+    <div v-for="chance in chances" v-bind:key="chance">
+      <Code />
       {{ red_count }}
       {{ white_count }}
     </div>
@@ -13,16 +11,16 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import Digit from '@/components/Digit.vue'
+import Code from '@/components/Code.vue'
 
 @Component({
   components: {
-    Digit
+    Code
   }
 })
 export default class Mastermind extends Vue {
-  @Prop({ default: 4 }) public param_digit!: number;
-  @Prop({ default: 12 }) public param_chances!: number;
+  @Prop({ default: 4 }) public digit_count!: number;
+  @Prop({ default: 12 }) public chances!: number;
   public white_count = 0;
   public red_count = 0;
 }

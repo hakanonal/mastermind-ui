@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, PropSync } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import VSwatches from 'vue-swatches'
 
 @Component({
@@ -56,13 +56,21 @@ export default class Digit extends Vue {
       label: '6'
     }];
 
-  get valueSync () {
-    return this.swatches.find((element) => { return element.color === this.color })?.label
+  get value () {
+    const selectedColor = this.swatches.find((element) => { return element.color === this.color })
+    if (selectedColor === undefined) {
+      return '0'
+    }
+    return selectedColor.label
   }
 
-  @PropSync('value')
-  set valueSync (v) {
-    this.color = this.swatches.find((element) => { return element.label === v })?.color
+  set value (v) {
+    const givenColor = this.swatches.find((element) => { return element.label === v })?.color
+    if (givenColor === undefined) {
+      this.color = '#FFFFFF'
+    } else {
+      this.color = givenColor
+    }
   }
 }
 </script>
