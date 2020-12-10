@@ -11,7 +11,9 @@
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.0-0"
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^4.0.0-0",
+    "vue-swatches": "2.0.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

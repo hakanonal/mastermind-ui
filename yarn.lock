@@ -8835,6 +8835,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-property-decorator@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-9.1.2.tgz#266a2eac61ba6527e2e68a6933cfb98fddab5457"
+  integrity sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==
+
 vue-router@^4.0.0-0:
   version "4.0.1"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-4.0.1.tgz?cache=0&sync_timestamp=1607347370073&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-4.0.1.tgz#309240e50524b1e7d4e82e27f0a0fa25fe3d1d71"
@@ -8847,6 +8852,11 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-swatches@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue-swatches/-/vue-swatches-2.0.3.tgz#6534b799e718c857bae9b78c8a3bb22805f89735"
+  integrity sha512-x973af/nU/21RgN1xdYE8N1/38C37/ga7bCOO2UNhG554n60Qy/ITjNP7CyCLzzO6frbAsXukqlq34KsSRTScA==
 
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
