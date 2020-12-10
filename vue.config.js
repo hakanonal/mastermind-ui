@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/mastermind-ui/dist/'
-  }
+  publicPath: '/mastermind-ui/dist/'
+}

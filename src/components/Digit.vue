@@ -3,26 +3,27 @@
     <div class="form__label">
       <strong>Please choose a color:</strong>
     </div>
-    <div class="form__input" v-if="color">
-      <VSwatches
+    <div class="form__input">
+      <v-swatches
         v-model="color"
+
         :swatches="swatches"
+
         row-length="6"
         shapes="circles"
         show-border
         popover-x="left"
-      ></VSwatches>
+      ></v-swatches>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
+
 import VSwatches from 'vue-swatches'
 
 export default {
-  components: {
-    VSwatches
-  },
+  components: { VSwatches },
   data () {
     return {
       color: '#F64272',

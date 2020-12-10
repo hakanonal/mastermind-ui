@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Component, Vue } from 'vue-property-decorator'
 import Mastermind from '@/components/Mastermind.vue' // @ is an alias to /src
 
-@Options({
+@Component({
   components: {
     Mastermind
   }

@@ -6,15 +6,15 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Component, Vue } from 'vue-property-decorator'
 import Digit from '@/components/Digit.vue'
 
-@Options({
+@Component({
   components: {
     Digit
   }
 })
-export default class HelloWorld extends Vue {
+export default class Mastermind extends Vue {
 
 }
 </script>
