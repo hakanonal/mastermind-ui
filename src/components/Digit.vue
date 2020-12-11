@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import VSwatches from 'vue-swatches'
 
 @Component({
@@ -23,6 +23,7 @@ import VSwatches from 'vue-swatches'
   }
 })
 export default class Digit extends Vue {
+  @Prop() public value!: number
   public color? = '#FFFFFF';
   public swatches = [
     {
@@ -56,21 +57,27 @@ export default class Digit extends Vue {
       label: '6'
     }];
 
-  get value () {
+  get valueLocal (): number {
     const selectedColor = this.swatches.find((element) => { return element.color === this.color })
     if (selectedColor === undefined) {
-      return '0'
+      return 0
     }
-    return selectedColor.label
+    return Number(selectedColor.label)
   }
 
-  set value (v) {
-    const givenColor = this.swatches.find((element) => { return element.label === v })?.color
+  set valueLocal (v: number) {
+    const givenColor = this.swatches.find((element) => { return Number(element.label) === v })?.color
     if (givenColor === undefined) {
       this.color = '#FFFFFF'
     } else {
       this.color = givenColor
     }
   }
+
+  created () {
+    console.log('ananı avradını')
+    this.valueLocal = this.value
+  }
 }
+
 </script>

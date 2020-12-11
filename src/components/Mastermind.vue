@@ -2,7 +2,7 @@
   <div class="hello">
     <h1> Mastermind </h1>
     <div v-for="chance in chances" v-bind:key="chance">
-      <Code />
+      <Code :code="6543"/>
       {{ red_count }}
       {{ white_count }}
     </div>
