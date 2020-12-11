@@ -18,6 +18,8 @@ import Digit from '@/components/Digit.vue'
 export default class Code extends Vue {
   @Prop({ default: 4 }) public digit_count!: number;
   @Prop({ default: 0 }) public code!: number;
+  @Prop({ default: 0 }) public red_count!: number;
+  @Prop({ default: 0 }) public white_count!: number;
 
   get codeList (): Array<number> {
     if (this.code === 0) {
