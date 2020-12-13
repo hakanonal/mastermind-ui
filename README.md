@@ -5,8 +5,3 @@ This Project is the user interface repo of the project [mastermind](https://gith
 ## How To Play
 
 To play the game click [here](https://hakanonal.github.io/mastermind-ui/dist). 
-
-#### Disclaimer
-
-Note that it is curently under development.
-
