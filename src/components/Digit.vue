@@ -3,18 +3,20 @@
     <VSwatches
       v-model="color"
       :swatches="swatches"
-      row-length="6"
+      row-length="3"
       shapes="circles"
       show-border
       show-labels
       popover-x="left"
       :trigger-style='{ borderWidth: "1px", borderStyle: "solid", borderColor: "black", marginRight: "5px" }'
+      :disabled="disabled"
+      @close="getSelectedDigit()"
     ></VSwatches>
   </span>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import VSwatches from 'vue-swatches'
 
 @Component({
@@ -23,36 +25,38 @@ import VSwatches from 'vue-swatches'
   }
 })
 export default class Digit extends Vue {
-  @Prop() public value!: number
+  @Prop({ type: Number }) public value!: number
+  @Prop({ type: Number }) public index!: number
+  @Prop({ default: false }) public disabled!: boolean;
   public color? = '#FFFFFF';
   public swatches = [
     {
-      color: '#F64272',
+      color: '#FF0000',
       showBorder: true,
       label: '1'
     },
     {
-      color: '#F64271',
+      color: '#00FF00',
       showBorder: true,
       label: '2'
     },
     {
-      color: '#F6648B',
+      color: '#0000FF',
       showBorder: true,
       label: '3'
     },
     {
-      color: '#F493A7',
+      color: '#FFFF00',
       showBorder: true,
       label: '4'
     },
     {
-      color: '#F891A6',
+      color: '#00FFFF',
       showBorder: true,
       label: '5'
     },
     {
-      color: '#FFCCD5',
+      color: '#FF00FF',
       showBorder: true,
       label: '6'
     }];
@@ -66,7 +70,7 @@ export default class Digit extends Vue {
   }
 
   set valueLocal (v: number) {
-    const givenColor = this.swatches.find((element) => { return Number(element.label) === v })?.color
+    const givenColor = this.swatches.find((element) => { return Number(element.label) === this.value })?.color
     if (givenColor === undefined) {
       this.color = '#FFFFFF'
     } else {
@@ -74,9 +78,17 @@ export default class Digit extends Vue {
     }
   }
 
-  created () {
-    console.log('ananı avradını')
+  mounted () {
     this.valueLocal = this.value
+  }
+
+  @Watch('value')
+  onValueChanged () {
+    this.valueLocal = this.value
+  }
+
+  getSelectedDigit () {
+    this.$emit('digitSelected', { value: this.valueLocal, index: this.index })
   }
 }
 
