@@ -8,6 +8,12 @@
       >
         Restart
       </a-button>
+      <a-alert
+        v-if="connectionErrorMessage!=''"
+        type="error"
+        :message="connectionErrorMessage"
+        banner
+      />
     </div>
     <div v-for="(chance,index) in apiResult.state" v-bind:key="index">
       <Code
@@ -28,6 +34,8 @@ import Code from '@/components/Code.vue'
 import axios from 'axios'
 import { Button } from 'ant-design-vue'
 
+const connectingToAPIText = 'Connecting to API...'
+
 @Component({
   components: {
     Code,
@@ -40,37 +48,31 @@ export default class Mastermind extends Vue {
 
   public apiResult = {}
   public endPoint = process.env.VUE_APP_END_POINT
+  public connectionErrorMessage = connectingToAPIText
 
   public refreshGameState () {
-    axios
-      .get(this.endPoint)
-      .then((response) => {
-        this.apiResult = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this._callAPI('', '')
   }
 
   public resetGameState () {
-    axios
-      .get(this.endPoint + 'reset')
-      .then((response) => {
-        this.apiResult = response.data
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this._callAPI('reset', '')
   }
 
   public playChance (code: number) {
+    this._callAPI('play/', String(code))
+  }
+
+  protected _callAPI (route: string, param: string) {
+    this.connectionErrorMessage = connectingToAPIText
     axios
-      .get(this.endPoint + 'play/' + code)
+      .get(this.endPoint + route + param)
       .then((response) => {
         this.apiResult = response.data
+        this.connectionErrorMessage = ''
       })
       .catch((error) => {
         console.log(error)
+        this.connectionErrorMessage = error.message
       })
   }
 
@@ -86,6 +88,10 @@ export default class Mastermind extends Vue {
 
 <style>
 .header
+{
+  margin-bottom: 10px;
+}
+.header > *
 {
   margin-bottom: 10px;
 }
