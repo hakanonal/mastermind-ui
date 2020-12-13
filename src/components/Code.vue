@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import Digit from '@/components/Digit.vue'
 
 @Component({
@@ -34,8 +34,13 @@ export default class Code extends Vue {
 
   public selectedCodeList!: Array<number>;
 
-  get codeList (): Array<number> {
+  @Watch('disabled')
+  protected _initSelectedCodeList () {
     this.selectedCodeList = Array.from({ length: this.digitCount }, () => 0).map(Number)
+  }
+
+  get codeList (): Array<number> {
+    this._initSelectedCodeList()
     if (this.code === 0) {
       return Array.from({ length: this.digitCount }, () => 0).map(Number)
     }
@@ -46,6 +51,7 @@ export default class Code extends Vue {
     this.selectedCodeList[digit.index] = digit.value
     if (!this.hasAnyZero(this.selectedCodeList)) {
       this.$emit('codeSelected', Number(this.selectedCodeList.join('')))
+      this._initSelectedCodeList()
     }
   }
 

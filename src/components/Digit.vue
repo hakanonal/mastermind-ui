@@ -83,6 +83,7 @@ export default class Digit extends Vue {
   }
 
   @Watch('value')
+  @Watch('disabled')
   onValueChanged () {
     this.valueLocal = this.value
   }

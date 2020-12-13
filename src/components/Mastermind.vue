@@ -12,7 +12,6 @@
         v-if="connectionErrorMessage!=''"
         type="error"
         :message="connectionErrorMessage"
-        banner
       />
     </div>
     <div v-for="(chance,index) in apiResult.state" v-bind:key="index">
@@ -58,8 +57,25 @@ export default class Mastermind extends Vue {
     this._callAPI('reset', '')
   }
 
-  public playChance (code: number) {
-    this._callAPI('play/', String(code))
+  public async playChance (code: number) {
+    this.connectionErrorMessage = connectingToAPIText
+    let stateCheck = {}
+    await axios
+      .get(this.endPoint)
+      .then((response) => {
+        stateCheck = response.data
+        this.connectionErrorMessage = ''
+      })
+      .catch((error) => {
+        console.log(error)
+        this.connectionErrorMessage = error.message
+      })
+    if (JSON.stringify(stateCheck) === JSON.stringify(this.apiResult)) {
+      this._callAPI('play/', String(code))
+    } else {
+      this.connectionErrorMessage = 'Another playerer is playing! Please come another time'
+      this.apiResult = stateCheck
+    }
   }
 
   protected _callAPI (route: string, param: string) {
