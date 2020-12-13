@@ -39,7 +39,7 @@ export default class Mastermind extends Vue {
   @Prop({ default: 12 }) public chances!: number;
 
   public apiResult = {}
-  public endPoint = 'http://localhost:5000/'
+  public endPoint = process.env.VUE_APP_END_POINT
 
   public refreshGameState () {
     axios
