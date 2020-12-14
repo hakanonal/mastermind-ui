@@ -69,7 +69,7 @@ export default class Code extends Vue {
 <style scoped>
 .disabled
 {
-  opacity: 30%;
+  opacity: 31%;
 }
 .feedback
 {
