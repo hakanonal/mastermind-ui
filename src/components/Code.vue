@@ -1,5 +1,5 @@
 <template>
-  <div :class="{disabled: disabled}">
+  <div :class="{disabledCode: disabled}">
     <span v-for="(d,index) in this.codeList" :key="index">
       <Digit
         :value="d"
@@ -67,7 +67,7 @@ export default class Code extends Vue {
 </script>
 
 <style scoped>
-.disabled
+.disabledCode
 {
   opacity: 31%;
 }
