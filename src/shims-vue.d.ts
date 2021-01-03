@@ -3,3 +3,4 @@ declare module '*.vue' {
   export default Vue
 }
 declare module 'vue-swatches'
+declare module 'vue-confetti'

@@ -28,7 +28,6 @@
     ]
   },
   "include": [
-    "decs.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
