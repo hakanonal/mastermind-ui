@@ -28,10 +28,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { ApiResult } from '@/models/interfaces/ApiResult'
+
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import Code from '@/components/Code.vue'
 import axios from 'axios'
 import { Button } from 'ant-design-vue'
+import VueConfetti from 'vue-confetti'
 
 const connectingToAPIText = 'Connecting to API...'
 
@@ -45,7 +48,7 @@ export default class Mastermind extends Vue {
   @Prop({ default: 4 }) public digitCount!: number;
   @Prop({ default: 12 }) public chances!: number;
 
-  public apiResult = {}
+  public apiResult: ApiResult = {};
   public endPoint = process.env.VUE_APP_END_POINT
   public connectionErrorMessage = connectingToAPIText
 
@@ -55,11 +58,12 @@ export default class Mastermind extends Vue {
 
   public resetGameState () {
     this._callAPI('reset', '')
+    VueConfetti.stop()
   }
 
   public async playChance (code: number) {
     this.connectionErrorMessage = connectingToAPIText
-    let stateCheck = {}
+    let stateCheck: ApiResult = {}
     await axios
       .get(this.endPoint)
       .then((response) => {
@@ -98,6 +102,15 @@ export default class Mastermind extends Vue {
 
   play (playedCode: number) {
     this.playChance(playedCode)
+  }
+
+  @Watch('apiResult')
+  protected _checkEndOfGame () {
+    if (this.apiResult.end === true && this.apiResult.chance === this.chances) {
+      this.connectionErrorMessage = 'You have lost the game!'
+    } else if (this.apiResult.end === true) {
+      VueConfetti.start()
+    }
   }
 }
 </script>
