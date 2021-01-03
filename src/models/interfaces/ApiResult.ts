@@ -4,4 +4,3 @@ export interface ApiResult {
     hidden_code?: number;
     state?: Array<Array<number>>;
   }
-  
