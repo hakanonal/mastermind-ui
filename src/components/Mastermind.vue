@@ -57,7 +57,6 @@ export default class Mastermind extends Vue {
 
   public resetGameState () {
     this._callAPI('reset', '')
-    this.$confetti.stop()
   }
 
   public async playChance (code: number) {
@@ -108,7 +107,7 @@ export default class Mastermind extends Vue {
     if (this.apiResult.end === true && this.apiResult.chance === this.chances) {
       this.connectionErrorMessage = 'You have lost the game!'
     } else if (this.apiResult.end === true) {
-      this.$confetti.start()
+      this.connectionErrorMessage = 'You won!'
     }
   }
 }
