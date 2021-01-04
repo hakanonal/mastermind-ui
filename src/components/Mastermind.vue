@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
-    <h1> Mastermind </h1>
+    <h1>
+      Mastermind
+      <span class="rules-link"><a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank">rules</a></span>
+    </h1>
     <div class="header">
       <a-button
         type="primary"
@@ -121,5 +124,9 @@ export default class Mastermind extends Vue {
 .header > *
 {
   margin-bottom: 10px;
+}
+.rules-link
+{
+  font-size: 12px;
 }
 </style>
